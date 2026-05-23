@@ -1,36 +1,157 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Zameen - Real Estate Platform
+
+A modern real estate platform built with Next.js, TypeScript, Prisma, and PostgreSQL. Similar to Zameen.com, this platform allows users to buy, sell, and rent properties across Pakistan.
+
+## Features
+
+- **Property Listings**: Browse, search, and filter properties by location, type, price, and more
+- **User Authentication**: Secure login/signup with role-based access (Buyer, Seller, Agent, Admin)
+- **Property Management**: Agents and sellers can add, edit, and manage property listings
+- **Advanced Search**: Filter properties by city, area, type, price range, bedrooms, and more
+- **Favorites**: Save properties to your favorites list
+- **Responsive Design**: Mobile-friendly interface built with Tailwind CSS
+- **Admin Dashboard**: Manage users, properties, and platform settings
+
+## Tech Stack
+
+- **Frontend**: Next.js 16, React 19, TypeScript, Tailwind CSS
+- **UI Components**: shadcn/ui
+- **Backend**: Next.js API Routes
+- **Database**: PostgreSQL with Prisma ORM
+- **Authentication**: NextAuth.js
+- **Icons**: Lucide React
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18+ 
+- PostgreSQL database (or use Prisma Postgres)
+
+### Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repository-url>
+cd my-app
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up environment variables:
+Create a `.env` file in the root directory with:
+```env
+DATABASE_URL="your-postgresql-connection-string"
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="your-secret-key-here"
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Set up the database:
+```bash
+# Run database migrations
+npm run db:migrate
 
-## Learn More
+# Generate Prisma client
+npm run db:generate
 
-To learn more about Next.js, take a look at the following resources:
+# Seed the database with sample data
+npm run db:seed
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. Run the development server:
+```bash
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+6. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Deploy on Vercel
+### Default Accounts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+After seeding the database, you can use these accounts:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Admin**: admin@zameen.com / admin123
+- **Agent**: agent@zameen.com / agent123
+
+## Project Structure
+
+```
+my-app/
+├── src/
+│   ├── app/                    # Next.js app router
+│   │   ├── api/               # API routes
+│   │   ├── admin/             # Admin dashboard
+│   │   ├── auth/              # Authentication pages
+│   │   ├── dashboard/         # User dashboard
+│   │   ├── properties/        # Property pages
+│   │   ├── layout.tsx         # Root layout
+│   │   └── page.tsx           # Homepage
+│   ├── components/            # React components
+│   │   ├── ui/               # shadcn/ui components
+│   │   └── *.tsx             # Custom components
+│   ├── lib/                  # Utility functions
+│   ├── types/                # TypeScript types
+│   └── middleware.ts         # Next.js middleware
+├── prisma/
+│   ├── schema.prisma         # Database schema
+│   └── seed.ts               # Seed script
+├── public/                   # Static assets
+└── package.json
+```
+
+## Key Features
+
+### For Buyers/Renters
+- Search properties by location, type, and price
+- View detailed property information with images
+- Save favorite properties
+- Contact agents directly
+
+### For Sellers/Agents
+- Add new property listings
+- Manage existing listings
+- Track property views and inquiries
+- Update profile and contact information
+
+### For Admins
+- Manage all users and properties
+- Approve/reject property listings
+- View platform statistics
+- Configure platform settings
+
+## API Routes
+
+- `GET /api/properties` - List properties with filters
+- `POST /api/properties` - Create new property
+- `GET /api/properties/[id]` - Get property details
+- `PUT /api/properties/[id]` - Update property
+- `DELETE /api/properties/[id]` - Delete property
+- `GET /api/cities` - List all cities
+- `GET /api/cities/[id]/areas` - List areas for a city
+- `POST /api/auth/register` - Register new user
+
+## Database Schema
+
+The database includes models for:
+- **User**: Buyers, sellers, agents, and admins
+- **Property**: Property listings with details
+- **City/Area**: Location data
+- **PropertyImage**: Property photos
+- **Favorite**: User's saved properties
+- **Inquiry**: Contact requests
+- **AgentProfile**: Agent-specific information
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+## License
+
+This project is licensed under the MIT License.
+# realestate-platform-next-js
