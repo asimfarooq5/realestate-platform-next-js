@@ -1,4 +1,4 @@
-# Zameen - Real Estate Platform
+# PakZameen - Real Estate Platform
 
 A modern real estate platform built with Next.js, TypeScript, Prisma, and PostgreSQL. Similar to Zameen.com, this platform allows users to buy, sell, and rent properties across Pakistan.
 
@@ -154,4 +154,3 @@ The database includes models for:
 ## License
 
 This project is licensed under the MIT License.
-# realestate-platform-next-js
