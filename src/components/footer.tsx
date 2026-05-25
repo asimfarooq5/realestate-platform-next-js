@@ -1,7 +1,12 @@
 import Link from "next/link"
 import { Building2, Mail, MapPin, Phone } from "lucide-react"
 
-const footerLinks = ["Properties", "Agents", "Mortgage", "Help Center"]
+const footerLinks = [
+  { href: "/properties", label: "Properties" },
+  { href: "/properties?purpose=buy", label: "Buy" },
+  { href: "/properties?purpose=rent", label: "Rent" },
+  { href: "/#agents", label: "Agents" },
+]
 
 export function Footer() {
   return (
@@ -24,8 +29,8 @@ export function Footer() {
           <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-white">Explore</h2>
           <div className="grid gap-3 text-sm text-gray-400">
             {footerLinks.map((link) => (
-              <Link key={link} href="#" className="transition hover:text-emerald-300">
-                {link}
+              <Link key={link.href} href={link.href} className="transition hover:text-emerald-300">
+                {link.label}
               </Link>
             ))}
           </div>
