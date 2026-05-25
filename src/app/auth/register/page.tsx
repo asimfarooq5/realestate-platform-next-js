@@ -1,7 +1,13 @@
 import Link from "next/link"
 import { Building2, LockKeyhole, Mail, UserRound } from "lucide-react"
 
-export default function RegisterPage() {
+type RegisterPageProps = {
+  searchParams: Promise<{ error?: string }>
+}
+
+export default async function RegisterPage({ searchParams }: RegisterPageProps) {
+  const { error } = await searchParams
+
   return (
     <div className="bg-gray-50">
       <section className="container mx-auto grid min-h-[calc(100vh-4rem)] gap-10 px-4 py-12 lg:grid-cols-[1fr_480px] lg:items-center">
@@ -22,11 +28,17 @@ export default function RegisterPage() {
             </span>
             <div>
               <h2 className="text-2xl font-bold text-gray-950">Create account</h2>
-              <p className="text-sm text-gray-600">Role-based auth wiring comes next.</p>
+              <p className="text-sm text-gray-600">Your account is protected with hashed credentials.</p>
             </div>
           </div>
 
-          <form className="grid gap-4">
+          {error ? (
+            <div className="mb-4 rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
+              {error}
+            </div>
+          ) : null}
+
+          <form action="/api/auth/register" method="post" className="grid gap-4">
             <label className="rounded-md border border-gray-200 px-4 py-3">
               <span className="flex items-center gap-2 text-xs font-semibold uppercase text-gray-500">
                 <UserRound className="size-4" aria-hidden="true" />
@@ -34,6 +46,7 @@ export default function RegisterPage() {
               </span>
               <input
                 name="name"
+                required
                 className="mt-2 w-full bg-transparent text-sm font-medium outline-none"
                 placeholder="Your name"
               />
@@ -47,6 +60,7 @@ export default function RegisterPage() {
               <input
                 type="email"
                 name="email"
+                required
                 className="mt-2 w-full bg-transparent text-sm font-medium outline-none"
                 placeholder="you@example.com"
               />
@@ -60,6 +74,8 @@ export default function RegisterPage() {
               <input
                 type="password"
                 name="password"
+                required
+                minLength={8}
                 className="mt-2 w-full bg-transparent text-sm font-medium outline-none"
                 placeholder="••••••••"
               />
@@ -68,14 +84,14 @@ export default function RegisterPage() {
             <label className="rounded-md border border-gray-200 px-4 py-3">
               <span className="block text-xs font-semibold uppercase text-gray-500">Account type</span>
               <select name="role" className="mt-2 w-full bg-transparent text-sm font-medium outline-none">
-                <option>Buyer / Renter</option>
-                <option>Seller</option>
-                <option>Agent</option>
+                <option value="buyer">Buyer / Renter</option>
+                <option value="seller">Seller</option>
+                <option value="agent">Agent</option>
               </select>
             </label>
 
             <button
-              type="button"
+              type="submit"
               className="rounded-md bg-emerald-700 px-4 py-3 text-sm font-semibold text-white transition hover:bg-emerald-800"
             >
               Create account
