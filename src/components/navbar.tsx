@@ -1,11 +1,11 @@
 import Link from "next/link"
-import { Building2, Menu, Search, UserRound } from "lucide-react"
+import { Building2, Home, Menu, Search } from "lucide-react"
 
 const navItems = [
-  { href: "#buy", label: "Buy" },
-  { href: "#rent", label: "Rent" },
-  { href: "#sell", label: "Sell" },
-  { href: "#agents", label: "Agents" },
+  { href: "/properties?purpose=buy", label: "Buy" },
+  { href: "/properties?purpose=rent", label: "Rent" },
+  { href: "/properties", label: "Properties" },
+  { href: "/#agents", label: "Agents" },
 ]
 
 export function Navbar() {
@@ -28,21 +28,21 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <button
-            type="button"
+          <Link
+            href="/properties"
             className="hidden size-10 items-center justify-center rounded-md border border-gray-200 text-gray-700 transition hover:border-emerald-300 hover:text-emerald-700 sm:flex"
             aria-label="Search"
             title="Search"
           >
             <Search className="size-5" aria-hidden="true" />
-          </button>
-          <button
-            type="button"
+          </Link>
+          <Link
+            href="/properties"
             className="hidden items-center gap-2 rounded-md bg-emerald-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-800 sm:flex"
           >
-            <UserRound className="size-4" aria-hidden="true" />
-            Sign in
-          </button>
+            <Home className="size-4" aria-hidden="true" />
+            Browse
+          </Link>
           <button
             type="button"
             className="flex size-10 items-center justify-center rounded-md border border-gray-200 text-gray-700 md:hidden"

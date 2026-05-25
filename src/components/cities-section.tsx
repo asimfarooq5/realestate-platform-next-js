@@ -1,12 +1,12 @@
+import Link from "next/link"
 import { ArrowRight, Building, MapPinned } from "lucide-react"
 
 const cities = [
-  { name: "Lahore", listings: "18,240", areas: "DHA, Gulberg, Bahria Town" },
-  { name: "Karachi", listings: "22,810", areas: "Clifton, DHA, Gulshan" },
-  { name: "Islamabad", listings: "12,430", areas: "F-11, G-13, Bahria Enclave" },
-  { name: "Rawalpindi", listings: "8,950", areas: "Satellite Town, Bahria Town" },
-  { name: "Multan", listings: "5,170", areas: "Bosan Road, Cantt, DHA" },
-  { name: "Faisalabad", listings: "4,820", areas: "Canal Road, Eden Valley" },
+  { name: "Lahore", listings: "1", areas: "DHA, Gulberg, Bahria Town" },
+  { name: "Karachi", listings: "1", areas: "Clifton, DHA, Gulshan" },
+  { name: "Islamabad", listings: "2", areas: "F-11, G-13, Bahria Enclave" },
+  { name: "Multan", listings: "1", areas: "Bosan Road, Cantt, DHA" },
+  { name: "Faisalabad", listings: "1", areas: "Canal Road, Eden Valley" },
 ]
 
 export function CitiesSection() {
@@ -27,9 +27,9 @@ export function CitiesSection() {
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {cities.map((city) => (
-            <button
+            <Link
               key={city.name}
-              type="button"
+              href={`/properties?city=${encodeURIComponent(city.name)}`}
               className="group flex items-center justify-between rounded-lg border border-gray-200 bg-white p-5 text-left shadow-sm transition hover:border-emerald-300 hover:shadow-md"
             >
               <span className="flex items-start gap-4">
@@ -43,7 +43,7 @@ export function CitiesSection() {
                 </span>
               </span>
               <ArrowRight className="size-5 text-gray-400 transition group-hover:translate-x-1 group-hover:text-emerald-700" aria-hidden="true" />
-            </button>
+            </Link>
           ))}
         </div>
       </div>

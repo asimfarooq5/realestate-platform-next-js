@@ -1,4 +1,6 @@
 import { MapPin, Search, SlidersHorizontal } from "lucide-react"
+import Link from "next/link"
+import { propertyTypes, purposes } from "@/lib/properties"
 
 export function HeroSection() {
   return (
@@ -17,13 +19,14 @@ export function HeroSection() {
           </p>
         </div>
 
-        <div className="mt-9 max-w-5xl rounded-lg bg-white p-3 text-gray-900 shadow-2xl">
+        <form action="/properties" className="mt-9 max-w-5xl rounded-lg bg-white p-3 text-gray-900 shadow-2xl">
           <div className="grid gap-3 md:grid-cols-[1.2fr_1fr_1fr_auto]">
             <label className="flex items-center gap-3 rounded-md border border-gray-200 px-4 py-3">
               <MapPin className="size-5 text-emerald-700" aria-hidden="true" />
               <span className="min-w-0">
                 <span className="block text-xs font-semibold uppercase text-gray-500">Location</span>
                 <input
+                  name="q"
                   className="w-full bg-transparent text-sm font-medium outline-none"
                   placeholder="City, area, or landmark"
                   aria-label="Location"
@@ -33,39 +36,43 @@ export function HeroSection() {
 
             <label className="rounded-md border border-gray-200 px-4 py-3">
               <span className="block text-xs font-semibold uppercase text-gray-500">Purpose</span>
-              <select className="w-full bg-transparent text-sm font-medium outline-none" aria-label="Purpose">
-                <option>Buy</option>
-                <option>Rent</option>
-                <option>Sell</option>
+              <select name="purpose" className="w-full bg-transparent text-sm font-medium outline-none" aria-label="Purpose">
+                {purposes.map((purpose) => (
+                  <option key={purpose.value} value={purpose.value}>
+                    {purpose.label}
+                  </option>
+                ))}
               </select>
             </label>
 
             <label className="rounded-md border border-gray-200 px-4 py-3">
               <span className="block text-xs font-semibold uppercase text-gray-500">Property type</span>
-              <select className="w-full bg-transparent text-sm font-medium outline-none" aria-label="Property type">
-                <option>House</option>
-                <option>Apartment</option>
-                <option>Plot</option>
-                <option>Commercial</option>
+              <select name="type" className="w-full bg-transparent text-sm font-medium outline-none" aria-label="Property type">
+                <option value="">Any type</option>
+                {propertyTypes.map((type) => (
+                  <option key={type.value} value={type.value}>
+                    {type.label}
+                  </option>
+                ))}
               </select>
             </label>
 
             <button
-              type="button"
+              type="submit"
               className="flex items-center justify-center gap-2 rounded-md bg-emerald-700 px-6 py-3 text-sm font-semibold text-white transition hover:bg-emerald-800"
             >
               <Search className="size-5" aria-hidden="true" />
               Search
             </button>
           </div>
-          <button
-            type="button"
+          <Link
+            href="/properties"
             className="mt-3 flex items-center gap-2 px-1 text-sm font-semibold text-emerald-700"
           >
             <SlidersHorizontal className="size-4" aria-hidden="true" />
             More filters
-          </button>
-        </div>
+          </Link>
+        </form>
       </div>
     </section>
   )
