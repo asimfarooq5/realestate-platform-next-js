@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { Building2, Home, Menu, Search } from "lucide-react"
+import { Building2, LogOut, Menu, Search, UserPlus, UserRound } from "lucide-react"
+import { getCurrentUser } from "@/lib/auth"
 
 const navItems = [
   { href: "/properties?purpose=buy", label: "Buy" },
@@ -8,7 +9,9 @@ const navItems = [
   { href: "/#agents", label: "Agents" },
 ]
 
-export function Navbar() {
+export async function Navbar() {
+  const user = await getCurrentUser()
+
   return (
     <header className="sticky top-0 z-50 border-b border-emerald-100 bg-white/95 backdrop-blur">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
@@ -36,13 +39,40 @@ export function Navbar() {
           >
             <Search className="size-5" aria-hidden="true" />
           </Link>
-          <Link
-            href="/properties"
-            className="hidden items-center gap-2 rounded-md bg-emerald-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-800 sm:flex"
-          >
-            <Home className="size-4" aria-hidden="true" />
-            Browse
-          </Link>
+          {user ? (
+            <>
+              <span className="hidden items-center gap-2 rounded-md border border-emerald-100 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-900 sm:flex">
+                <UserRound className="size-4" aria-hidden="true" />
+                {user.name}
+              </span>
+              <form action="/api/auth/logout" method="post" className="hidden sm:block">
+                <button
+                  type="submit"
+                  className="flex items-center gap-2 rounded-md border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-700 transition hover:border-emerald-300 hover:text-emerald-700"
+                >
+                  <LogOut className="size-4" aria-hidden="true" />
+                  Sign out
+                </button>
+              </form>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/auth/login"
+                className="hidden items-center gap-2 rounded-md border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-700 transition hover:border-emerald-300 hover:text-emerald-700 sm:flex"
+              >
+                <UserRound className="size-4" aria-hidden="true" />
+                Sign in
+              </Link>
+              <Link
+                href="/auth/register"
+                className="hidden items-center gap-2 rounded-md bg-emerald-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-800 lg:flex"
+              >
+                <UserPlus className="size-4" aria-hidden="true" />
+                Create account
+              </Link>
+            </>
+          )}
           <button
             type="button"
             className="flex size-10 items-center justify-center rounded-md border border-gray-200 text-gray-700 md:hidden"
