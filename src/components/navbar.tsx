@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Building2, Home, Menu, Search } from "lucide-react"
+import { Building2, Menu, Search, UserPlus, UserRound } from "lucide-react"
 
 const navItems = [
   { href: "/properties?purpose=buy", label: "Buy" },
@@ -37,11 +37,18 @@ export function Navbar() {
             <Search className="size-5" aria-hidden="true" />
           </Link>
           <Link
-            href="/properties"
-            className="hidden items-center gap-2 rounded-md bg-emerald-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-800 sm:flex"
+            href="/auth/login"
+            className="hidden items-center gap-2 rounded-md border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-700 transition hover:border-emerald-300 hover:text-emerald-700 sm:flex"
           >
-            <Home className="size-4" aria-hidden="true" />
-            Browse
+            <UserRound className="size-4" aria-hidden="true" />
+            Sign in
+          </Link>
+          <Link
+            href="/auth/register"
+            className="hidden items-center gap-2 rounded-md bg-emerald-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-800 lg:flex"
+          >
+            <UserPlus className="size-4" aria-hidden="true" />
+            Create account
           </Link>
           <button
             type="button"
